@@ -8,9 +8,15 @@
 $(document).ready(function() {
     
     $('#generateAddress').click(function() {
-        const network = bitcoin.networks.testnet ;
-    //    const ECPair = ECPairFactory({ network, rng: () => tinysecp256k1.randomBytes(32) });
-
+        // function createWallet() {
+            const keyPair = bitcoin.ECPair.makeRandom();
+            const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey });
+            const privateKey = keyPair.privateKey.toString('hex');
+          
+            console.log(`New Bitcoin Address: ${address}`);
+            console.log(`Private Key: ${privateKey}`);
+        //  }
+          
    
     const keypair = bitcoin.ecpair.makeRandom({ network })
     console.log(keypair);
